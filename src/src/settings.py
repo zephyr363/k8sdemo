@@ -83,9 +83,9 @@ WSGI_APPLICATION = "src.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django_prometheus.db.backends.postgresql",
-        "NAME": os.getenv("DB_NAME", "cruddemo"),
-        "USER": os.getenv("DB_USER", "user"),
-        "PASSWORD": os.getenv("DB_PASSWORD", "password"),
+        "NAME": os.getenv("POSTGRES_DB", "cruddemo"),
+        "USER": os.getenv("POSTGRES_USER", "user"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", "password"),
         "HOST": os.getenv("DB_HOST", "localhost"),
         "PORT": os.getenv("DB_PORT", "5432"),
     }
