@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
 from ninja_extra import NinjaExtraAPI
 from users.controllers import UserController
 
@@ -23,6 +23,7 @@ api = NinjaExtraAPI()
 api.register_controllers(UserController)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api/', api.urls),
+    path("admin/", admin.site.urls),
+    path("api/", api.urls),
+    path("", include("django_prometheus.urls")),
 ]
