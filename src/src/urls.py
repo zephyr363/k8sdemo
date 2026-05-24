@@ -20,11 +20,9 @@ from ninja_extra import NinjaExtraAPI
 from users.controllers import UserController
 
 api = NinjaExtraAPI()
-
 api.register_controllers(UserController)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api.urls),
 ]
-

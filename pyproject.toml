@@ -13,6 +13,6 @@ dependencies = [
     "django-prometheus>=2.4.0",
     "gunicorn>=26.0.0",
     "isort>=8.0.1",
-    "psycopg2>=2.9.12",
+    "psycopg2-binary>=2.9.12",
     "ruff>=0.15.14",
 ]

@@ -1,0 +1,28 @@
+name: CI/CD Django Kubernetes
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-push-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        run: login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build Docker image
+        run: docker build -t ${{ secrets.DOCKER_USERNAME }}/django-crud:${{ github.sha }} .
+      
+      - name: Push Docker Image
+        run: docker push -t ${{ secrets.DOCKER_USERNAME }}/django-crud:${{ github.sha }}
+      
+      - name: Update Kubernetes deployment image
+        run: |
+          kubectl set image deployment/django-crud django-crud=${{ secrets.DOCKER_USERNAME }}/django-crud:${{ github.sha }}
+          kubectl rollout status deployment/django-crud
