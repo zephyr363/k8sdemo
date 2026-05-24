@@ -1,7 +1,7 @@
 from ninja_extra import api_controller, route
 from ninja_extra.exceptions import NotFound, ValidationError
 from .models import User
-from .schema import UserSchema
+from .schema import UserSchema, UserCreateSchema
 
 
 @api_controller("/users", tags=["Users"])
@@ -11,7 +11,7 @@ class UserController:
         return User.objects.all()
 
     @route.post("/create", response=UserSchema)
-    def create_user(self, user: UserSchema):
+    def create_user(self, user: UserCreateSchema):
         try:
             return User.objects.create_user(**user.dict())
         except Exception as e:
